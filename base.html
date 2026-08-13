@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Todo Manager</title>
+    <style>
+        /* ===== BASE SAAS STYLING ===== */
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e6e9f2 50%, #f8fafc 100%);
+            min-height: 100vh;
+            padding: 3rem 1rem;
+            margin: 0;
+        }
+
+        /* ===== MAIN APP CONTAINER ===== */
+        .app-container {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 
+                0 1px 3px rgba(0, 0, 0, 0.05),
+                0 10px 25px rgba(15, 23, 42, 0.05),
+                0 20px 48px rgba(15, 23, 42, 0.08);
+            padding: 2.5rem;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        /* ===== TASK ITEM CARDS ===== */
+        .task-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 12px;
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            margin-bottom: 0.75rem;
+        }
+        .task-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+            border-color: #e2e8f0;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* ===== CHECKBOX TOGGLE ===== */
+        .checkbox-toggle {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 6px;
+            border: 2px solid #e2e8f0;
+        }
+        .checkbox-toggle:hover {
+            border-color: #6366f1;
+        }
+        .checkbox-toggle.done {
+            background: #10b981;
+            border-color: #10b981;
+        }
+
+        /* ===== COMPLETED TASKS ===== */
+        .completed-task {
+            opacity: 0.5;
+        }
+        .completed-task .task-text {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+
+        /* ===== FILTER TABS ===== */
+        .filter-tab {
+            transition: all 0.2s ease;
+            border-radius: 8px;
+            padding: 0.5rem 0.875rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        .filter-tab.active {
+            background: #3b82f6;
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .filter-tab:not(.active):hover {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== INPUT FIELDS ===== */
+        input, select, textarea {
+            border-radius: 10px !important;
+            border: 1px solid #e2e8f0 !important;
+            transition: all 0.2s ease !important;
+            font-size: 0.9375rem !important;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+            outline: none;
+        }
+
+        /* ===== ICONS ===== */
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: #64748b;
+        }
+        .icon-btn:hover {
+            background: #f1f5f9;
+        }
+        .icon-btn.edit:hover {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+        .icon-btn.delete:hover {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            .app-container {
+                padding: 1.5rem;
+                border-radius: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container fade-in">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
